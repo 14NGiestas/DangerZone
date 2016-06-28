@@ -1,0 +1,23 @@
+Facebook 2016, 27th of June
+
+Work In progress
+
+Someone marks you in a random post with some attractive title you downloads some unexpected file "comment_63035416.jse" then
+if you just double click or open in the browser with the default program (Internet Explorer) it will download "image files" listed below
+to a folder called "Mozila", and renamed to the real extension, as you can read in the file "comment_63035416_decoded.jse" file.
+
+'http://userexperiencestatics.net/ext/Autoit.jpg'   =>  '\\Autoit.exe'
+'http://userexperiencestatics.net/ext/bg.jpg'       =>  '\\bg.js'
+'http://userexperiencestatics.net/ext/ekl.jpg'      =>  '\\ekl.au3'
+'http://userexperiencestatics.net/ext/ff.jpg'       =>  '\\ff.zip'
+'http://userexperiencestatics.net/ext/force.jpg'    =>  '\\force.au3'
+'http://userexperiencestatics.net/ext/sabit.jpg'    =>  '\\sabit.au3'
+'http://userexperiencestatics.net/ext/manifest.jpg' =>  '\\manifest.json'
+'http://userexperiencestatics.net/ext/run.jpg'      =>  '\run.bat'
+'http://userexperiencestatics.net/ext/up.jpg'       =>  '\\up.au3'
+'http://whos.amung.us/pingjs/?k=pingjse346'         =>  '\\ping.js'
+'http://whos.amung.us/pingjs/?k=pingjse3462'        =>  '\\ping2.js'
+
+Then the malicious script runs the "run.bat" file that in your turn runs the autoit codes "force.au3" and "ekl.au3"
+The first one, in my analysis, is just a 6k lines of nothing... There is no function calling just function defs and constants defs, I think it is just to outwit.
+The second one however is being decoded in "ekl_decoded.au3". I say decoded because the author of the script uses cryptography to obfuscate the code, a nice play I say.
