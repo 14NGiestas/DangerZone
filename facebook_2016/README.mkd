@@ -7,15 +7,25 @@ if you just double click or open in the browser with the default program (Intern
 to a folder called "Mozila", and renamed to the real extension, as you can read in the file "comment_63035416_decoded.jse" file.
 
 'http://userexperiencestatics.net/ext/Autoit.jpg'   =>  '\\Autoit.exe'
+
 'http://userexperiencestatics.net/ext/bg.jpg'       =>  '\\bg.js'
+
 'http://userexperiencestatics.net/ext/ekl.jpg'      =>  '\\ekl.au3'
+
 'http://userexperiencestatics.net/ext/ff.jpg'       =>  '\\ff.zip'
+
 'http://userexperiencestatics.net/ext/force.jpg'    =>  '\\force.au3'
+
 'http://userexperiencestatics.net/ext/sabit.jpg'    =>  '\\sabit.au3'
+
 'http://userexperiencestatics.net/ext/manifest.jpg' =>  '\\manifest.json'
+
 'http://userexperiencestatics.net/ext/run.jpg'      =>  '\run.bat'
+
 'http://userexperiencestatics.net/ext/up.jpg'       =>  '\\up.au3'
+
 'http://whos.amung.us/pingjs/?k=pingjse346'         =>  '\\ping.js'
+
 'http://whos.amung.us/pingjs/?k=pingjse3462'        =>  '\\ping2.js'
 
 Then the malicious script runs the "run.bat" file that in your turn runs the autoit codes "force.au3" and "ekl.au3"
