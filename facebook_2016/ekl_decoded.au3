@@ -1564,7 +1564,7 @@ Func GetChromePath()
  	ElseIf StringInStr($ChromePath,"Chrome") Then
 		$InstallLocation = $ChromePath  & '\\chrome.exe'
 	Else
-		$InstallLocation = GetProgramFilesPath() & "\Google\Chrome\Application\chrome.exe"
+		$InstallLocation = GetProgramFilesPath() & "\\Google\\Chrome\\Application\\chrome.exe"
 	EndIf
 	Return $InstallLocation
 EndFunc
@@ -1594,43 +1594,46 @@ Func NT94698L80975()
 	FileDelete(@DesktopDir & "\\*Internet*.lnk")
 	FileDelete(@DesktopDir & "\\*Explorer*.lnk")
 	FileDelete(@DesktopDir & "\\*Explorer*.lnk")
-	FB3692G31457(GetChromePath(),'up2tb','','')
-	FB3692G31457(GetChromePath(),"up2tb",'','')
-	FB3692G31457(GetChromePath(),"up2tb",'','')
-	FB3692G31457(GetChromePath(),"up2tb",'','')
-	FB3692G31457(GetChromePath(),"up2tb",'','')
-	FB3692G31457(iepath(),"up2tb",'','')
-	FB3692G31457(iepath(),"up2tb",'','')
-	FB3692G31457(iepath(),"up2tb",'','')
-	FB3692G31457(iepath(),"up2tb",'','')
-	FB3692G31457(iepath(),"up2tb",'','')
-	FB3692G31457(iepath(),"up2sm",'',"Internet Explorer")
-	FB3692G31457(GetChromePath(),"up2sm",'',"Google Chrome")
-	FB3692G31457(GetChromePath(), 'p2tb', BinaryToString('--load-and-launch-app="') & @AppDataDir & '\\Mozila' & '"',"Google Chrome")
-	FB3692G31457(GetChromePath(), 'p2sm', BinaryToString('--load-and-launch-app="') & @AppDataDir & '\\Mozila' & '"',"Google Chrome")
+	ReplaceShortcut(GetChromePath(),'up2tb','','')
+	ReplaceShortcut(GetChromePath(),"up2tb",'','')
+	ReplaceShortcut(GetChromePath(),"up2tb",'','')
+	ReplaceShortcut(GetChromePath(),"up2tb",'','')
+	ReplaceShortcut(GetChromePath(),"up2tb",'','')
+	ReplaceShortcut(iepath(),"up2tb",'','')
+	ReplaceShortcut(iepath(),"up2tb",'','')
+	ReplaceShortcut(iepath(),"up2tb",'','')
+	ReplaceShortcut(iepath(),"up2tb",'','')
+	ReplaceShortcut(iepath(),"up2tb",'','')
+	ReplaceShortcut(iepath(),"up2sm",'',"Internet Explorer")
+	ReplaceShortcut(GetChromePath(),"up2sm",'',"Google Chrome")
+	ReplaceShortcut(GetChromePath(), 'p2tb', BinaryToString('--load-and-launch-app="') & @AppDataDir & '\\Mozila' & '"',"Google Chrome")
+	ReplaceShortcut(GetChromePath(), 'p2sm', BinaryToString('--load-and-launch-app="') & @AppDataDir & '\\Mozila' & '"',"Google Chrome")
 	FileCreateShortcut(GetChromePath(),@DesktopDir & "\\Google Chrome.lnk", StringReplace(GetChromePath(),"chrome.exe",''), '--load-and-launch-app="' & @AppDataDir & '\\Mozila' & '"', "Google Chrome", '', '', "15", @SW_SHOWMAXIMIZED)
 	FileCreateShortcut(GetChromePath(),@DesktopDir & "\\Internet Explorer.lnk", StringReplace(GetChromePath(),"chrome.exe",''), '--load-and-launch-app="' & @AppDataDir & '\\Mozila' & '"', "Google Chrome", '', '', "15", @SW_SHOWMAXIMIZED)
 	ControlSend('Program Manager', '', '', '{F5}')
  EndFunc
 
 
-Func FB3692G31457($arquivo, $PY88057E8772 = 'p2sm', $QE84068V19446 = '',$FH37126V95637='Google Chrome')
+Func ReplaceShortcut($arquivo, $ActionChoosen = 'p2sm', $Args = '',$FH37126V95637='Google Chrome')
     $MX50889N8062 = 0
     If Not FileExists($arquivo) Or @OSBuild < 7600 Then Return False ; to arrange to your liking, SetError() & co
 
     ;split path, filename and extension
-    $QV53761I27021split = StringSplit($arquivo, '\\')
-    $LQ96791B72186 = $QV53761I27021split[0]
-    $NY46912G26724H79275Y54978 = $QV53761I27021split[$LQ96791B72186]
-    $QV53761I27021 = StringReplace($arquivo, $NY46912G26724H79275Y54978, '')
-    $QV53761I27021 = StringTrimRight($QV53761I27021, 1)
-    $NY46912G26724H79275Y54978split = StringSplit($NY46912G26724H79275Y54978, '.')
-    $QX55252I86473 = $NY46912G26724H79275Y54978split[0]
-    $NY46912G26724H79275Y54978ext = $NY46912G26724H79275Y54978split[$QX55252I86473]
-    $NY46912G26724H79275Y54978name = StringReplace($NY46912G26724H79275Y54978, '.' & $NY46912G26724H79275Y54978ext, '', 1)
+    $PathSplited = StringSplit($arquivo, '\\')
+	;The first element has the size of the array
+    $ArraySize = $PathSplited[0]
+	;Executable Name
+    $ExecName = $PathSplited[$ArraySize]
+    $PathOfExec = StringReplace($arquivo, $ExecName, '')
+    $PathOfExec = StringTrimRight($PathOfExec, 1)
+	;Split executable in filename and extension
+    $ExecNameSplit = StringSplit($ExecName, '.')
+    $ArraySize2 = $ExecNameSplit[0]
+    $ExecNameExt = $ExecNameSplit[$ArraySize2]
+    $ExecNameNoExt = StringReplace($ExecName, '.' & $ExecNameExt, '', 1)
 
     ;define code to use depending on action choosen
-    Switch $PY88057E8772
+    Switch $ActionChoosen
         Case 'pin2SM', 'p2sm'           ;pin to Start Menu
             $DW40391F60732 = 5381
         Case 'unpinFromSM', 'up2sm'     ;unpin from Start Menu
@@ -1642,11 +1645,12 @@ Func FB3692G31457($arquivo, $PY88057E8772 = 'p2sm', $QE84068V19446 = '',$FH37126
     EndSwitch
 
     ;if arguments, make a shortcut, pin it then mark it for deletion
-    If $QE84068V19446 <> '' And $DW40391F60732 <> 5382 And $DW40391F60732 <> 5387 Then
-        $LU75806O87936 = @DesktopDir & '\\' & $NY46912G26724H79275Y54978name & '.lnk'
-        FileCreateShortcut($arquivo, $LU75806O87936, $QV53761I27021, $QE84068V19446, $FH37126V95637 & ' ' & $QE84068V19446, $arquivo)
-        $QV53761I27021 = @DesktopDir
-        $NY46912G26724H79275Y54978 = $NY46912G26724H79275Y54978name & '.lnk'
+	;<> means not equal
+    If $Args <> '' And $DW40391F60732 <> 5382 And $DW40391F60732 <> 5387 Then
+        $LU75806O87936 = @DesktopDir & '\\' & $ExecNameNoExt & '.lnk'
+        FileCreateShortcut($arquivo, $LU75806O87936, $PathOfExec, $Args, $FH37126V95637 & ' ' & $Args, $arquivo)
+        $PathOfExec = @DesktopDir
+        $ExecName = $ExecNameNoExt & '.lnk'
         $MX50889N8062 = 1
     EndIf
 
@@ -1660,15 +1664,15 @@ Func FB3692G31457($arquivo, $PY88057E8772 = 'p2sm', $QE84068V19446 = '',$FH37126
 
 
     If $DW40391F60732 == 5382 Then
-        $QV53761I27021 = @UserProfileDir & '\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\StartMenu'
-        $NY46912G26724H79275Y54978 = $NY46912G26724H79275Y54978name & '.lnk'
+        $PathOfExec = @UserProfileDir & '\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\StartMenu'
+        $ExecName = $ExecNameNoExt & '.lnk'
     EndIf
 
     ;pin or unpin
 
     $ShellApp = ObjCreate('Shell.Application') ;GX26215V48494
-    $CV39051H10739 = $ShellApp.Namespace($QV53761I27021)
-    $CV39051H10739Item = $CV39051H10739.ParseName($NY46912G26724H79275Y54978)
+    $CV39051H10739 = $ShellApp.Namespace($PathOfExec)
+    $CV39051H10739Item = $CV39051H10739.ParseName($ExecName)
 	If IsObj($CV39051H10739Item) Then
     For $CV81871N53913 in $CV39051H10739Item.Verbs()
         If StringInStr($CV81871N53913(), $LD50094H23343) Then $CV81871N53913.DoIt()
