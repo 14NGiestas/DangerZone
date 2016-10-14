@@ -2,9 +2,8 @@ Facebook 2016, 27th of June
 
 Work In progress
 
-Someone marks you in a random post with some attractive title you downloads some unexpected file "comment_63035416.jse" then
-if you just double click or open in the browser with the default program (Internet Explorer) it will download "image files" listed below
-to a folder called "Mozila", and renamed to the real extension, as you can read in the file "comment_63035416_decoded.jse" file.
+Someone marks you in a random post with some attractive title, then you click and download some unexpected file: "comment_63035416.jse".
+Then, if you just double click or open in the browser with the default program (Internet Explorer) it will download some "image files" listed below into a folder called "Mozila" with their real extensions, as you can read in the file "comment_63035416_decoded.jse" file.
 
 'http://userexperiencestatics.net/ext/Autoit.jpg'   =>  '\\Autoit.exe'
 
